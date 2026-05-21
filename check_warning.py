@@ -395,7 +395,7 @@ def check_warning_stock(name, today=None):
 
     lines.append("")
     lines.append("=== 해제 시나리오 (판단일 진행 중) ===")
-    lines.append(f"오늘 종가 (T-1): {calc['today_close']:,}원  [{calc['t_minus_1'][0]}]")
+    lines.append(f"최근 거래일 종가 (T-1): {calc['today_close']:,}원  [{calc['t_minus_1'][0]}]")
     lines.append(f"T-2 종가: {calc['t_minus_2'][1]:,}원  [{calc['t_minus_2'][0]}]")
     lines.append(f"T-5 종가: {calc['t_minus_5'][1]:,}원  [{calc['t_minus_5'][0]}]")
     lines.append(f"T-15 종가: {calc['t_minus_15'][1]:,}원  [{calc['t_minus_15'][0]}]")
@@ -412,14 +412,14 @@ def check_warning_stock(name, today=None):
     pct_chg = (calc["binding"] / today_close - 1) * 100
     lines.append("")
     if calc["binding"] == today_close:
-        lines.append(f"내일 해제 조건: 종가가 오늘({today_close:,}원)보다 낮게 마감")
+        lines.append(f"다음 종가 해제 조건: T-1({today_close:,}원)보다 낮게 마감")
     elif calc["binding"] > today_close:
         lines.append(
-            f"내일 해제 조건: 종가 < {calc['binding']:,.0f}원 ({pct_chg:+.1f}% 미만 상승)"
+            f"다음 종가 해제 조건: < {calc['binding']:,.0f}원 ({pct_chg:+.1f}% 미만 상승)"
         )
     else:
         lines.append(
-            f"내일 해제 조건: 종가 < {calc['binding']:,.0f}원 ({pct_chg:+.1f}%, 오늘보다 하락 필요)"
+            f"다음 종가 해제 조건: < {calc['binding']:,.0f}원 ({pct_chg:+.1f}%, T-1보다 하락 필요)"
         )
 
     if calc["halt"]:
@@ -427,12 +427,12 @@ def check_warning_stock(name, today=None):
         halt_pct = (h["price"] / today_close - 1) * 100
         if h["reachable"]:
             lines.append(
-                f"⚠ 거래정지: 종가 ≥ {h['price']:,.0f}원 ({halt_pct:+.1f}%) "
+                f"⚠ 거래정지 트리거: 종가 ≥ {h['price']:,.0f}원 ({halt_pct:+.1f}%) "
                 f"[상한가 {h['sanghan']:,}원]"
             )
         else:
             lines.append(
-                f"거래정지: {h['price']:,.0f}원 ({halt_pct:+.1f}%) — "
+                f"거래정지 트리거: {h['price']:,.0f}원 ({halt_pct:+.1f}%) — "
                 f"상한가({h['sanghan']:,}원) 초과로 도달 불가"
             )
 
