@@ -1,6 +1,6 @@
-# investment-alarm-checker
+# tugyeong-eod
 
-한국 주식 시장의 **투자경고종목**을 입력하면, **다음 거래일** 기준으로
+장 종료(End-of-Day) 후 한국 시장의 **투자경고종목**(투경)을 입력하면, **다음 거래일** 기준으로
 - 이미 해제되었는지 / 곧 해제 예정인지
 - 판단일 진행 중이라면 종가가 얼마면 해제 / 거래정지가 되는지
 - 아직 판단일 전이면 첫 판단일이 언제인지
@@ -16,8 +16,8 @@
 ## 설치
 
 ```bash
-git clone https://github.com/erikimdg/investment-alarm-checker.git
-cd investment-alarm-checker
+git clone https://github.com/erikimdg/tugyeong-eod.git
+cd tugyeong-eod
 ```
 
 ## 사용법
